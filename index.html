@@ -1,0 +1,97 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800" rel="stylesheet">
+
+</head>
+<body align="center" >
+  <script type="text/javascript">
+$(document).ready(function() {
+   var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substrRegex;
+ 
+ 
+    matches = [];
+ 
+    substrRegex = new RegExp(q, 'i');
+ 
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push({ value: str });
+      }
+    });
+ 
+    cb(matches);
+  };
+};
+ 
+var states = ['CORE', 'Nice', 'GG', 'soluchan', 'exun is bae'
+];
+ 
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'states',
+  displayKey: 'value',
+  source: substringMatcher(states)
+});
+});
+function validateForm() {
+    var x = document.forms["entry"]["core"].value;
+    
+    if (x == "core" |x=="CORE"|x=="C.O.R.E.") {
+        window.open("index2.html", );
+        
+    }
+    else
+      alert("No results found. :(")
+    return false;
+}
+var wage = document.getElementById("submitt");
+wage.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) { 
+        window.open("index2.html", "_self");
+    }
+    return false;
+
+});
+
+  </script>
+  <div class="header" align="left">
+    <img src="logo.png" height="70px" width="180px">
+  </div>
+<div class="search" id="the-basics">
+  <form name="entry" onsubmit="return validateForm()" method="post">
+  <input id="search" class="typeahead" name="core" type="search" placeholder="Hi there">
+
+  <button type="submit" value="submit" id= "submitt" class="typeahead"><img src="search.png" height="50px" height="50px"></button>
+  </form>
+</div>
+<div id="slideshow">
+   <div>
+     <img src="background.png" class = "one">
+   </div>
+   <div>
+     <img src="background_one.png" class = "two">
+   </div>
+     <div>
+     <img src="background_two_substitute.png" class = "three">
+   </div>
+  </div>
+<script>
+$("#slideshow > div:gt(0)").hide();
+setInterval(function() { 
+  $('#slideshow > div:first')
+    .fadeOut(1000)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+},  3500);
+</script>
+</body>
